@@ -18,9 +18,9 @@ jobs:
     steps:
         # import des éléments du répo
       - uses: actions/checkout@v3
-      - name: Use Node ${{matrix.node-version}}
+     # - name: Use Node ${{matrix.node-version}}
         # mise en place de node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
 
