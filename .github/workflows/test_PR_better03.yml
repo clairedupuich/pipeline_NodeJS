@@ -4,6 +4,7 @@ on:
   pull_request:
     types:
       - "opened"
+      - "reopened"
     branches:
       - 'develop'
 
@@ -18,26 +19,24 @@ jobs:
     steps:
         # import des éléments du répo
       - uses: actions/checkout@v3
-     # - name: Use Node ${{matrix.node-version}}
+      - name: Build sur ${{matrix.node-version}} de nede
         # mise en place de node
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
 
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm test
-  
-  Second_job_upload:
-    name: Upload
-    runs-on: ubuntu-latest
-    steps:
-      - name: creer le fichier
-        run: echo "${{matrix.node-version}} marche très bien !" >> coverage.txt
+      - run: npm test:coverage > coverage.txt 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Artifact
+          name: coverage
           path: coverage.txt
+
+
+      
+  
+  
 
   

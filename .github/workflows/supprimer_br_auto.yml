@@ -8,12 +8,12 @@ on:
       
 jobs:
   automerge:
-    if: startswith(github.head_ref, 'feature666/**')
+    if: startswith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     steps:
       - name: Delete merged branch
-        uses: koj-co/delete-merged-action@master #?????????????????????????
+        uses: koj-co/delete-merged-action@master 
         with:
-          branches: "!main, !develop *" #不能删除的分支
+          branches: "!main, !develop, feature/**" #不能删除的分支
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

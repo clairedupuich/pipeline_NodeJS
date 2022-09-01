@@ -1,1 +1,2 @@
-name: Create issue branche 
+defaultBranch: 'develop'
+branchName: '${issue.title}'

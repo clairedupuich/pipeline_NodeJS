@@ -4,6 +4,7 @@ on:
   pull_request:
     types:
       - "opened"
+      - "reopened"
     branches:
       - 'develop'
 
@@ -18,9 +19,9 @@ jobs:
     steps:
         # import des éléments du répo
       - uses: actions/checkout@v3
-     # - name: Use Node ${{matrix.node-version}}
+      - name: Build sur ${{matrix.node-version}} de nede
         # mise en place de node
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
 
