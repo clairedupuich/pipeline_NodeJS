@@ -1,0 +1,43 @@
+name: Test_PR
+
+on:
+  pull_request:
+    types:
+      - "opened"
+    branches:
+      - 'develop'
+
+jobs:
+  Test_PR:
+    if: startswith(github.head_ref, 'feature/**')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+    
+    steps:
+        # import des éléments du répo
+      - uses: actions/checkout@v3
+     # - name: Use Node ${{matrix.node-version}}
+        # mise en place de node
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+  
+  Second_job_upload:
+    name: Upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: creer le fichier
+        run: echo "${{matrix.node-version}} marche très bien !" >> coverage.txt
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Artifact
+          path: coverage.txt
+
+  

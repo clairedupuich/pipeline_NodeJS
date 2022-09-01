@@ -1,0 +1,19 @@
+name: Delete after Merge 
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'develop'
+      
+jobs:
+  automerge:
+    if: startswith(github.head_ref, 'feature666/**')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete merged branch
+        uses: koj-co/delete-merged-action@master #?????????????????????????
+        with:
+          branches: "!main, !develop *" #不能删除的分支
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
