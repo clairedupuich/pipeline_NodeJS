@@ -14,6 +14,6 @@ jobs:
       - name: Delete merged branch
         uses: koj-co/delete-merged-action@master 
         with:
-          branches: "!main, !develop, feature/**" #不能删除的分支
+          branches: "!main, !develop, feature/**" # ! 不能删除的分支, 没有感叹号的代表可以删除的分支
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
